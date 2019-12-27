@@ -1,5 +1,4 @@
 pkg/
 .output/
 .temp/
-src/
-!src/writ
+src/github.com/
