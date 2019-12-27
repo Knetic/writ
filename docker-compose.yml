@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  writstatic:
+    image: writstatic:latest
+    container_name: writstatic
+    links:
+      - writ
+    environment:
+        VIRTUAL_HOST: writ.glester.com
+        VIRTUAL_PORT: 80
+    ports:
+      - 1444:80
+  writ:
+    image: writ:latest
+    container_name: writ
+    expose:
+      - 8080
+
+# networks:
+#   default:
+#     external:
+#       name: subdomains_subdomains

@@ -6,14 +6,14 @@
         <script src="src/main.js"></script>
     </head>
     <body>
-        <nav>
-			<li v-for="item in list">
-				<a v-bind:href="/f/{{item.text}}">
+        <nav id="nav">
+			<li v-for="item in items">
+				<a v-bind:href="item.text">
 					{{item.text}}
 				</a>
 			</li>
 		</nav>
-		<content>
+		<content id="content">
 			{{body}}
 		</content>
     </body>

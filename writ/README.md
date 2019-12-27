@@ -14,8 +14,8 @@ Useful as part of a larger ecosystem that serves static files.
 The given `nginx.conf` is an example of how to rewrite requests and proxy to `writ`.
 
 ```
-location /writs/ {
-  rewrite ^/writs/(.*) /$1  break;
+location /f/ {
+  rewrite ^/f/(.*) /$1  break;
   proxy_pass http://writ/$uri;
 }
 ```

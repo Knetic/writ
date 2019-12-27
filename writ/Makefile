@@ -52,8 +52,7 @@ fpmPackage: versionTest fpmTest
 		./docs/writ.7=/usr/share/man/man7/writ.7 \
 		./autocomplete/writ=/etc/bash_completion.d/writ \
 		./package/init.d.sh=/etc/init.d/writ \
-		./package/defaults.sh=/etc/default/writ \
-		./static/=/var/lib/writ/static/
+		./package/defaults.sh=/etc/default/writ
 
 	@mv ./*.deb ./.output/
 
@@ -81,7 +80,7 @@ ifeq ($(shell which docker), )
 	@exit 1
 endif
 
-containerized_build:
+containerized_build: dockerTest
 
 	docker run \
 		--rm \
@@ -92,7 +91,18 @@ containerized_build:
 		bash -c \
 		"cd /srv/build; make build"
 
-containerized_package: dockerTest
+containerized_dist: dockerTest
+
+	docker run \
+		--rm \
+		-v "$(CURDIR)":"/srv/build":rw \
+		-u "$(shell id -u $(whoami)):$(shell id -g $(whoami))" \
+		-e WRIT_VERSION=$(WRIT_VERSION) \
+		golang:1.10 \
+		bash -c \
+		"cd /srv/build; make dist"
+
+containerized_package: dockerTest containerized_dist
 
 	docker run \
 		-v "$(CURDIR)":"/srv/build" \
@@ -100,4 +110,4 @@ containerized_package: dockerTest
 		-e WRIT_VERSION=$(WRIT_VERSION) \
 		alanfranz/fpm-within-docker:debian-wheezy \
 		bash -c \
-		"cd /srv/build; make dist"
+		"cd /srv/build; make fpmPackage"

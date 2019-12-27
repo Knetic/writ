@@ -29,7 +29,7 @@ func parseRunSettings() (RunSettings, error) {
 
 	var ret RunSettings
 
-	flag.StringVar(&ret.ServePath, "p", ":8080", "ip/port to serve http on")
+	flag.StringVar(&ret.ServePath, "p", ":80", "ip/port to serve http on")
 	flag.Parse()
 	return ret, nil
 }
