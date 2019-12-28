@@ -57,7 +57,7 @@ fpmPackage: versionTest fpmTest
 	@mv ./*.deb ./.output/
 
 dockerPackage: containerized_package dockerTest
-	docker build -t writ:latest .
+	docker build . -t writ:latest
 
 fpmTest:
 ifeq ($(shell which fpm), )
@@ -108,6 +108,6 @@ containerized_package: dockerTest containerized_dist
 		-v "$(CURDIR)":"/srv/build" \
 		-u "$(shell id -u $(whoami)):$(shell id -g $(whoami))" \
 		-e WRIT_VERSION=$(WRIT_VERSION) \
-		alanfranz/fpm-within-docker \
+		alanfranz/fpm-within-docker:debian-stretch \
 		bash -c \
 		"cd /srv/build; make fpmPackage"
