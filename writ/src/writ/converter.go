@@ -4,6 +4,7 @@ import (
 	"io"
 	"io/ioutil"
 	"github.com/gomarkdown/markdown"
+	"github.com/gomarkdown/markdown/html"
 )
 
 // Encapsulates a request to convert the given `reader`'s contents from md to html
@@ -16,6 +17,9 @@ type convertRequest struct {
 
 // (goroutine) indefinitely accepts requests through `in`, and converts them.
 func runConverter(in chan *convertRequest) {
+
+	// don't let browsers get any ideas about using style quotes.
+	html.Escaper['"'] = []byte("&#34;")
 
 	for req := range in {
 
