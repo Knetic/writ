@@ -1,2 +1,2 @@
 build:
-	@docker build -t writstatic .
+	@docker build -t writstatic:latest .

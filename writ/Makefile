@@ -108,6 +108,6 @@ containerized_package: dockerTest containerized_dist
 		-v "$(CURDIR)":"/srv/build" \
 		-u "$(shell id -u $(whoami)):$(shell id -g $(whoami))" \
 		-e WRIT_VERSION=$(WRIT_VERSION) \
-		alanfranz/fpm-within-docker:debian-wheezy \
+		alanfranz/fpm-within-docker \
 		bash -c \
 		"cd /srv/build; make fpmPackage"
