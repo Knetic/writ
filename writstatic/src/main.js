@@ -85,6 +85,7 @@ function checkCurrentURLContent()
 	if(window.location.pathname.startsWith("/a/"))
 	{
 		var title = window.location.pathname.replace("/a/", "");
+		title = decodeURIComponent(title);
 		loadContent(title, false);
 	}
 }
