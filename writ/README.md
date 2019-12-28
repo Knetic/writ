@@ -9,15 +9,8 @@ Useful as part of a larger ecosystem that serves static files.
 * `/list` - recursively lists all MD files that can be served. Trims the MD suffix.
 * `/*` - Any other path is checked to see if it's an MD file. If not, 404. If so, converted to HTML and returned.
 
-## nginx
+## Running
 
-The given `nginx.conf` is an example of how to rewrite requests and proxy to `writ`.
+The executable itself serves markdown files anywhere in its current working directory, recursively downward.
 
-```
-location /f/ {
-  rewrite ^/f/(.*) /$1  break;
-  proxy_pass http://writ/$uri;
-}
-```
-
-Assuming `writ` is a linked docker container running writ on 80.
+However, usually this is run in a container, the cwd set to `/usr/share/writ`, and that location mounted to some other volume, or somewhere on the host.
