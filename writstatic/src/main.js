@@ -50,6 +50,8 @@ function loadNav(callback)
 		for(i = 0; i < parsed.items.length; i++)
 		{
 			const item = parsed.items[i];
+			if(item == "_about")
+				continue;
 
 			created = {text: item};
 			newItems.push(created);
