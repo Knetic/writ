@@ -1,4 +1,5 @@
-var content, nav;
+var content = null;
+var nav = null;
 
 function main()
 {
@@ -12,25 +13,29 @@ function main()
 		}
 	})
 
-	nav = new Vue
-	({
-		el: "#nav",
-		data: {
-			items: [],
-			loading: false,
-			selected: ""
-		},
-		methods: {
-			navigate: function(event) {
-				event.preventDefault();
+	try
+	{
+		nav = new Vue
+		({
+			el: "#nav",
+			data: {
+				items: [],
+				loading: false,
+				selected: ""
+			},
+			methods: {
+				navigate: function(event) {
+					event.preventDefault();
 
-				var path = event.target.attributes["text"].value;
-				loadContent(path, true);
+					var path = event.target.attributes["text"].value;
+					loadContent(path, true);
+				}
 			}
-		}
-	})
+		})
 
-	loadNav(checkCurrentURLContent);	
+		loadNav(checkCurrentURLContent);	
+	}
+	catch(err){}
 }
 
 function loadNav(callback)
@@ -68,12 +73,16 @@ function loadContent(title, addToHistory)
 		content.body = request.response;
 		content.contentsEmpty = content.body == null || content.body.length <= 0;
 		
-		nav.loading = false;
-		nav.selected = title;
+		if(nav != null)
+		{
+			nav.loading = false;
+			nav.selected = title;
+		}
 	}
 	request.send();
 
-	nav.loading = true;
+	if(nav != null)
+		nav.loading = true;
 
 	if(addToHistory)
 		history.pushState(null, title, "/a/" + title);
@@ -87,6 +96,13 @@ function checkCurrentURLContent()
 		var title = window.location.pathname.replace("/a/", "");
 		title = decodeURIComponent(title);
 		loadContent(title, false);
+		return;
+	}
+
+	if(window.location.pathname.startsWith("/about"))
+	{
+		loadContent("_about", false);
+		return;
 	}
 }
 

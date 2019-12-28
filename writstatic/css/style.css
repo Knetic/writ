@@ -99,6 +99,10 @@ content div.bottomPadding
 }
 
 /*
+	Below here is markdown styling.
+*/
+
+/*
 	Triple-tick
 */
 pre
@@ -174,4 +178,12 @@ h4
 {
 	font-family: 'Futura', 'Helvetica', sans-serif;
 	font-size: 18pt;
+}
+
+hr
+{
+	border: none;
+	border-left: 1px solid rgba(29, 29, 29, 0.06);
+	border-right: 1px solid rgba(29, 29, 29, 0.06);
+	height: 25px;
 }

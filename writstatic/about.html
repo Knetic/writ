@@ -1,60 +1,22 @@
 <html>
     <head>
-        <link rel="stylesheet" href="css/about.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="/src/main.js"></script>
     </head>
     <body>
-		<nav id="nav">
+		<nav>
 			<div class="padding">
 				About
 			</div>
 
-			<div class="back">
+			<div class="link">
 				<a href="/">Back to Posts</a>
 			</div>
 		</nav>
-		<content>
-				<p>
-					I constantly find myself needing to write down some obscure steps to accomplish a technical goal. 
-					Whatever I'm after usually only needs to be done once, and is forgotten by the time I need it again (or when i mention it to someone else who is interested). 
-					Usually, re-googling is enough to solve the problem. But sometimes the specific setup being used requires a hybrid of obvious answers, or a little extra knowledge not captured in regular posts.
-				</p>
-				
-				<p>
-					So, this whole thing exists to put that information on the internet, 
-					to fill in the blanks where the previous published knowledge isn't quite there.
-				</p>
-
-				<p>
-					In the past, I'dve advised asking an informational question on the appropriate StackExchange site. However, I'm one of those insufferable people who has 
-					<a href="https://stackoverflow.blog/2018/04/26/stack-overflow-isnt-very-welcoming-its-time-for-that-to-change/">cultural</a>, 
-					<a href="https://meta.stackexchange.com/questions/336526/stack-overflow-is-doing-me-ongoing-harm-its-time-to-fix-it">ethical</a>, 
-					<a href="https://meta.stackexchange.com/questions/339235/is-stack-exchange-staff-removing-gofundme-links">moral</a> and 
-					<a href="https://meta.stackexchange.com/questions/333678/was-the-retroactive-change-to-cc-by-sa-4-0-approved-by-stack-exchanges-lawyers">legal</a> 
-					concerns about how that site is operated by its new management, 
-					their increasingly <a href="https://meta.stackoverflow.com/questions/386505/new-home-page-makes-it-seem-like-so-doesnt-allow-free-use-any-more">money-focused</a> actions, 
-					and the ownership's hostility towards the 
-					<a href="https://blog.codinghorror.com/stack-overflow-none-of-us-is-as-dumb-as-all-of-us/">original goal</a> of the site.
-				</p>
-
-				<p>
-					Given the lack of places where this kind of technical knowledge can be entrusted; 
-					it's more responsible to publish the information myself, direct people towards specific posts,
-					and for everyone else - hope that search engines index it properly. 
-					Which is how the whole Internet was always supposed to work.
-				</p>
-				<br/>
-				<br/>
-				<p>
-					On a technical level for this site itself, the static content is hosted on nginx, and i wrote some middleware that on-the-fly converts markdown-to-html 
-					(using <a href="https://github.com/gomarkdown/markdown">this</a>).
-					The posts are on the same server, and the folder they live in are shared by 
-					<a href="https://github.com/knetic/boji">webdav</a> - so that i can create/edit posts from anywhere without needing to run any after-the-fact processes, or fighting with a CMS.
-				</p>
-				<br/>
-				<br/>
-				<p>
-					If you're looking for a bio of me as a person, that's not what this is for.
-				</p>
+		<content id="content">
+			<div v-html="body" id="current"></div>
+			<div class="bottomPadding"></div>
 		</content>
     </body>
 </html>
