@@ -21,7 +21,7 @@ nav
 	display: flex;
 	flex-flow: column;
 	float: left;
-	width: 300px;
+	width: 400px;
 	height: 100%;
 
 	overflow-y: scroll;
@@ -43,10 +43,16 @@ nav a
 	cursor: pointer;
 }
 
-nav a.disabled
+nav a.selected
 {
-	color: #666666;
+	color: #111111;
 	cursor: unset;
+}
+
+nav span
+{
+	color: #999999;
+	font-size: 12pt;
 }
 
 nav div.padding
@@ -80,4 +86,6 @@ content
 
 	padding-left: 75px;
 	padding-top: 50px;
+
+	line-height: 25px;
 }

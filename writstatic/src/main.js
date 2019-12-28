@@ -7,7 +7,8 @@ function main()
 		el: "#content",
 		data: {
 			body: "",
-			contentsEmpty: true
+			contentsEmpty: true,
+			selected: ""
 		}
 	})
 
@@ -16,7 +17,8 @@ function main()
 		el: "#nav",
 		data: {
 			items: [],
-			loading: false
+			loading: false,
+			selected: ""
 		},
 		methods: {
 			navigate: function(event) {
@@ -65,7 +67,9 @@ function loadContent(title, addToHistory)
 	{
 		content.body = request.response;
 		content.contentsEmpty = content.body == null || content.body.length <= 0;
+		
 		nav.loading = false;
+		nav.selected = title;
 	}
 	request.send();
 

@@ -13,9 +13,17 @@
 			</div>
 
 			<div v-for="item in items" class="link">
-				<a v-bind:text="item.text" v-on:click="navigate" v-bind:class="{disabled: loading}">
+
+				<a v-bind:text="item.text" 
+					v-on:click="navigate" 
+					v-if="!loading"
+					v-bind:class="{selected: (selected == item.text)}">
 					{{item.text}}
 				</a>
+
+				<span v-if="loading">
+					{{item.text}}
+				</span>
 			</div>
 		</nav>
 		<content id="content">
