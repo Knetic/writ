@@ -40,6 +40,7 @@ nav a
 	color: #247988;
 	font-size: 12pt;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 nav div.padding
@@ -56,7 +57,7 @@ nav div.padding
 
 content
 {
-	max-width: 600px;
+	max-width: 800px;
 	
 	display: flex;
 	flex-flow: column;
@@ -64,6 +65,6 @@ content
 	
 	float: left;
 
-	padding-left: 20px;
+	padding-left: 75px;
 	padding-top: 50px;
 }

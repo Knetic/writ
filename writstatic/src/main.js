@@ -1,6 +1,5 @@
 var content, nav;
 
-
 function main()
 {
 	content = new Vue
@@ -17,6 +16,12 @@ function main()
 		el: "#nav",
 		data: {
 			items: []
+		},
+		methods: {
+			navigate: function(event) {
+				event.preventDefault();
+				loadContent(event.target.attributes["href"].value);
+			}
 		}
 	})
 
@@ -38,7 +43,7 @@ function loadNav()
 
 			created = 
 			{
-				href: "/r/" + item,
+				href: "/f/" + item,
 				text: item
 			};
 			newItems.push(created);
@@ -49,9 +54,16 @@ function loadNav()
 	request.send();
 }
 
-function loadContent(name)
+function loadContent(path)
 {
-	contentsEmpty = content.body == null || content.body.length <= 0;
+	request = new XMLHttpRequest();
+	request.open("GET", path);
+	request.onload = function()
+	{
+		content.body = request.response;
+		content.contentsEmpty = content.body == null || content.body.length <= 0;
+	}
+	request.send();
 }
 
 window.onload = main;

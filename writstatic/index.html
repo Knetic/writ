@@ -12,13 +12,14 @@
 			</div>
 
 			<div v-for="item in items" class="link">
-				<a v-bind:href="item.href">
+				<a v-bind:href="item.href" v-on:click="navigate">
 					{{item.text}}
 				</a>
 			</div>
 		</nav>
 		<content id="content">
-			{{body}}
+			<div v-html="body"></div>
+			
 			<span v-if="contentsEmpty">
 				Click a post on the left.
 			</span>
