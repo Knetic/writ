@@ -21,18 +21,20 @@ function main()
 		methods: {
 			navigate: function(event) {
 				event.preventDefault();
-				loadContent(event.target.attributes["href"].value);
+
+				var path = event.target.attributes["text"].value;
+				loadContent(path, true);
 			}
 		}
 	})
 
-	loadNav();
+	loadNav(checkCurrentURLContent);	
 }
 
-function loadNav()
+function loadNav(callback)
 {
 	request = new XMLHttpRequest();
-	request.open("GET", "/list");
+	request.open("GET", "/list", true);
 	request.onload = function() 
 	{
 		var parsed = JSON.parse(request.response);
@@ -42,25 +44,23 @@ function loadNav()
 		{
 			const item = parsed.items[i];
 
-			created = 
-			{
-				href: "/f/" + item,
-				text: item
-			};
+			created = {text: item};
 			newItems.push(created);
 		}
 
 		nav.items = newItems;
+
+		// for unknown reasons, we have to chain (rather than in parallel) xhr requests.
+		if(callback)
+			callback();
 	}
 	request.send();
 }
 
-function loadContent(path)
+function loadContent(title, addToHistory)
 {
-	nav.loading = true;
-
 	request = new XMLHttpRequest();
-	request.open("GET", path);
+	request.open("GET", "/f/" + title, true);
 	request.onload = function()
 	{
 		content.body = request.response;
@@ -68,6 +68,22 @@ function loadContent(path)
 		nav.loading = false;
 	}
 	request.send();
+
+	nav.loading = true;
+
+	if(addToHistory)
+		history.pushState(null, title, "/a/" + title);
+}
+
+function checkCurrentURLContent()
+{
+	// check to see if we're loading into a guide directly on load.
+	if(window.location.pathname.startsWith("/a/"))
+	{
+		var title = window.location.pathname.replace("/a/", "");
+		loadContent(title, false);
+	}
 }
 
 window.onload = main;
+window.onpopstate = checkCurrentURLContent;
