@@ -57,7 +57,7 @@ fpmPackage: versionTest fpmTest
 	@mv ./*.deb ./.output/
 
 dockerPackage: containerized_package dockerTest
-	docker build . -t writ:latest
+	docker build -t writ:latest .
 
 fpmTest:
 ifeq ($(shell which fpm), )
