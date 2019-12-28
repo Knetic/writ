@@ -7,14 +7,21 @@
     </head>
     <body>
         <nav id="nav">
-			<li v-for="item in items">
-				<a v-bind:href="item.text">
+			<div class="padding">
+				Posts
+			</div>
+
+			<div v-for="item in items" class="link">
+				<a v-bind:href="item.href">
 					{{item.text}}
 				</a>
-			</li>
+			</div>
 		</nav>
 		<content id="content">
 			{{body}}
+			<span v-if="contentsEmpty">
+				Click a post on the left.
+			</span>
 		</content>
     </body>
 </html>

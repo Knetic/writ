@@ -7,7 +7,8 @@ function main()
 	({
 		el: "#content",
 		data: {
-			body: ""
+			body: "",
+			contentsEmpty: true
 		}
 	})
 
@@ -29,19 +30,28 @@ function loadNav()
 	request.onload = function() 
 	{
 		var parsed = JSON.parse(request.response);
-		for(item in parsed.items)
+		var newItems = [];
+
+		for(i = 0; i < parsed.items.length; i++)
 		{
-			item.text = "/r/" + item.text;
+			const item = parsed.items[i];
+
+			created = 
+			{
+				href: "/r/" + item,
+				text: item
+			};
+			newItems.push(created);
 		}
 
-		nav.data = parsed;
+		nav.items = newItems;
 	}
 	request.send();
 }
 
 function loadContent(name)
 {
-	
+	contentsEmpty = content.body == null || content.body.length <= 0;
 }
 
 window.onload = main;
