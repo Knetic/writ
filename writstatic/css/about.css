@@ -29,26 +29,6 @@ nav
 	margin-right: 15px;
 }
 
-nav div.link
-{
-	height: 30px;
-	padding-left: 15px;
-}
-
-nav a
-{
-	color: #247988;
-	font-size: 12pt;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-nav a.disabled
-{
-	color: #666666;
-	cursor: unset;
-}
-
 nav div.padding
 {
 	width: 100%;
@@ -61,11 +41,15 @@ nav div.padding
 	padding-top: 20px;
 }
 
-nav div.padding a
+nav a
 {
-	display: block;
-	font-size: 8pt;
-	text-align: center;
+	color: #247988;
+	font-size: 12pt;
+	text-decoration: none;
+	cursor: pointer;
+
+	height: 30px;
+	padding-left: 15px;
 }
 
 content

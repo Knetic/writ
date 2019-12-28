@@ -9,10 +9,11 @@
         <nav id="nav">
 			<div class="padding">
 				Posts
+				<a href="/about.html">(about)</a>
 			</div>
 
 			<div v-for="item in items" class="link">
-				<a v-bind:href="item.href" v-on:click="navigate">
+				<a v-bind:href="item.href" v-on:click="navigate" v-bind:class="{disabled: loading}">
 					{{item.text}}
 				</a>
 			</div>

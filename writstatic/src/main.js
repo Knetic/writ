@@ -15,7 +15,8 @@ function main()
 	({
 		el: "#nav",
 		data: {
-			items: []
+			items: [],
+			loading: false
 		},
 		methods: {
 			navigate: function(event) {
@@ -56,12 +57,15 @@ function loadNav()
 
 function loadContent(path)
 {
+	nav.loading = true;
+
 	request = new XMLHttpRequest();
 	request.open("GET", path);
 	request.onload = function()
 	{
 		content.body = request.response;
 		content.contentsEmpty = content.body == null || content.body.length <= 0;
+		nav.loading = false;
 	}
 	request.send();
 }
