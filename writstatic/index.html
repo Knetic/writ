@@ -27,11 +27,12 @@
 			</div>
 		</nav>
 		<content id="content">
-			<div v-html="body"></div>
+			<div v-html="body" id="current"></div>
 			
 			<span v-if="contentsEmpty">
 				Click a post on the left.
 			</span>
+			<div class="bottomPadding"></div>
 		</content>
     </body>
 </html>

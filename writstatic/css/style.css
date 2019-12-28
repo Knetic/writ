@@ -5,7 +5,7 @@ html
 
 body
 {
-    overflow: hidden;
+	overflow: hidden;
     position: relative;
     margin: 0;
     padding: 0;
@@ -13,7 +13,8 @@ body
     width: 100%;
     font-size: 10pt;
     font-family: "sans-serif";
-    background-color: #f9f9f9;
+	background-color: #f9f9f9;
+	color: #050505;
 }
 
 nav
@@ -26,7 +27,7 @@ nav
 
 	overflow-y: scroll;
 
-	margin-right: 15px;
+	margin-right: 100px;
 }
 
 nav div.link
@@ -75,17 +76,77 @@ nav div.padding a
 }
 
 content
-{
-	max-width: 800px;
-	
+{	
 	display: flex;
 	flex-flow: column;
 	height: 100%;
-	
-	float: left;
+	position: relative;
+	overflow-y: scroll;
 
-	padding-left: 75px;
 	padding-top: 50px;
-
 	line-height: 25px;
+}
+
+content div#current
+{
+	max-width: 800px;
+}
+
+content div.bottomPadding
+{
+	min-height: 300px;
+}
+
+/*
+	Triple-tick
+*/
+pre
+{
+	font-family: monospace;
+	
+	background-color: rgba(29, 29, 29, 0.04);
+	border-radius: 3px;
+	border: 1px solid rgba(29, 29, 29, 0.14);
+
+	margin-left: 25px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 700px;
+	overflow-x: scroll
+}
+
+/*
+	single-tick (also within triple tick)
+*/
+code
+{
+	font-family: monospace;
+	background-color: rgba(29, 29, 29, 0.04);
+	border-radius: 3px;
+	border: 1px solid rgba(29, 29, 29, 0.14);
+	margin-left: 2px;
+	margin-right: 2px;
+	color: #e01e5a;
+	padding: 4px;
+}
+
+pre code
+{
+	color: #050505;
+	background-color: unset;
+	border: none;
+}
+
+/*
+	====
+*/
+h1
+{
+	padding-left: 20px;
+	padding-bottom: 3px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid rgba(29, 29, 29, 0.04);
+	text-align: center;
 }
