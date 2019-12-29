@@ -74,8 +74,10 @@ function loadContent(title, addToHistory)
 	{
 		content.body = request.response;
 		content.contentsEmpty = content.body == null || content.body.length <= 0;
-		document.title = title;
 		
+		if(!content.contentsEmpty)
+			document.title = title;
+
 		if(nav != null)
 		{
 			nav.loading = false;
