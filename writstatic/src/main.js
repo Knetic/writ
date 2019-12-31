@@ -76,7 +76,10 @@ function loadContent(title, addToHistory)
 		content.contentsEmpty = content.body == null || content.body.length <= 0;
 		
 		if(!content.contentsEmpty)
+		{
 			document.title = title;
+			window.scrollTo(0, 0);
+		}
 
 		if(nav != null)
 		{
