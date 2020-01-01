@@ -1,6 +1,7 @@
 package writ
 
 import (
+	"strings"
 	"io"
 	"io/ioutil"
 	"github.com/gomarkdown/markdown"
@@ -28,8 +29,17 @@ func runConverter(in chan *convertRequest) {
 			req.done <- err
 			continue
 		}
-		
-		req.output = markdown.ToHTML(content, nil, nil)
+
+		// strip out carriage returns, this renderer doesn't handle them well.
+		sanitized := fixLineEndings(string(content))
+
+		req.output = markdown.ToHTML([]byte(sanitized), nil, nil)
 		req.done <- nil
 	}
+}
+
+func fixLineEndings(in string) string {
+	in = strings.Replace(in, "\r\n", "\n", -1)
+	in = strings.Replace(in, "\r", "\n", -1)
+	return in;
 }
