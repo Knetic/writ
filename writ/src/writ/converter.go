@@ -1,11 +1,11 @@
 package writ
 
 import (
-	"strings"
-	"io"
-	"io/ioutil"
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
+	"io"
+	"io/ioutil"
+	"strings"
 )
 
 // Encapsulates a request to convert the given `reader`'s contents from md to html
@@ -13,7 +13,7 @@ import (
 type convertRequest struct {
 	reader io.Reader
 	output []byte
-	done chan error
+	done   chan error
 }
 
 // (goroutine) indefinitely accepts requests through `in`, and converts them.
@@ -41,5 +41,5 @@ func runConverter(in chan *convertRequest) {
 func fixLineEndings(in string) string {
 	in = strings.Replace(in, "\r\n", "\n", -1)
 	in = strings.Replace(in, "\r", "\n", -1)
-	return in;
+	return in
 }

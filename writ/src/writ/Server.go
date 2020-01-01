@@ -1,11 +1,11 @@
 package writ
 
 import (
+	"encoding/json"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
-	"encoding/json"
 )
 
 type Server struct {
@@ -45,7 +45,7 @@ func (this Server) list(response http.ResponseWriter, request *http.Request) {
 
 	items, _ := filepath.Glob("./**.md")
 	for i := 0; i < len(items); i++ {
-		
+
 		item := items[i]
 		if strings.HasSuffix(item, ".md") {
 			item = item[:len(item)-3]
@@ -53,7 +53,7 @@ func (this Server) list(response http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	r := ListFiles {
+	r := ListFiles{
 		Items: items,
 	}
 
@@ -62,7 +62,7 @@ func (this Server) list(response http.ResponseWriter, request *http.Request) {
 		writeError(response, err)
 		return
 	}
-	
+
 	response.Write(serialized)
 }
 
@@ -76,9 +76,9 @@ func (this Server) convertFile(path string) ([]byte, error) {
 
 	done := make(chan error)
 
-	req := convertRequest {
+	req := convertRequest{
 		reader: f,
-		done: done,
+		done:   done,
 	}
 	this.converter <- &req
 	err = <-done
@@ -88,7 +88,7 @@ func (this Server) convertFile(path string) ([]byte, error) {
 
 func writeError(response http.ResponseWriter, err error) {
 	response.WriteHeader(500)
-	response.Write([]byte(err.Error()))		
+	response.Write([]byte(err.Error()))
 }
 
 type ListFiles struct {

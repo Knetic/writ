@@ -1,9 +1,9 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
-	"flag"
 	"writ"
 )
 
@@ -17,7 +17,7 @@ func main() {
 	var err error
 
 	settings, err = parseRunSettings()
-	if(err != nil) {
+	if err != nil {
 		fatal(err, 1)
 	}
 
